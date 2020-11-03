@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3977605971447191488}
   - component: {fileID: 3977605971447191490}
   - component: {fileID: -7696726497504952539}
+  - component: {fileID: 8237804472356799843}
   m_Layer: 0
   m_Name: WRock
   m_TagString: Untagged
@@ -69,8 +70,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1189744657
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 2724963404071155675, guid: c8fec8bc92b34fe4c910acee01094317,
     type: 3}
@@ -123,3 +124,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.04, y: 2.25}
   m_EdgeRadius: 0
+--- !u!114 &8237804472356799843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3977605971447191519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: befa63b2450d3c34793bb5bac90a245a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

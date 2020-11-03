@@ -52,7 +52,7 @@ public class Board : MonoBehaviour
         Tile ret = null;
         if(address.Length != 2)
         {
-            Debug.LogError("Wrong parameter");
+            Debug.LogError("Wrong parameter " + address);
             throw new ArgumentException();
         }
         int second;
@@ -67,4 +67,29 @@ public class Board : MonoBehaviour
         return ret;
     }
 
+    public Tile GetTile(Tuple<char, int> address)
+    {
+        
+        Tile ret = null;
+        int second;
+        //TODO: optimize this loop
+        foreach (Tile t in GetComponentsInChildren<Tile>())
+        {
+            if (address.Item1 == t.address.Item1 && address.Item2 == t.address.Item2) ret = t;
+        }
+        return ret;
+    }
+
+    public Tile GetTile(char c, int i)
+    {
+
+        Tile ret = null;
+        int second;
+        //TODO: optimize this loop
+        foreach (Tile t in GetComponentsInChildren<Tile>())
+        {
+            if (c == t.address.Item1 && i == t.address.Item2) ret = t;
+        }
+        return ret;
+    }
 }

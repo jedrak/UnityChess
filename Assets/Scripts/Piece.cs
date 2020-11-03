@@ -8,6 +8,7 @@ public class Piece : MonoBehaviour
     private Tile _currentTile;
     public string StartingTile = "a1";
     private bool _pickedUp = false;
+    private IPieceMovement _movement;
 
     private void Start()
     {
@@ -17,27 +18,41 @@ public class Piece : MonoBehaviour
         //Debug.Log(Board._instance.GetTile(StartingTile));
         _currentTile = Board._instance.GetTile(StartingTile);
         transform.position = _currentTile.transform.position;
+        _movement = GetComponent<IPieceMovement>();
+
+    }
+
+
+    private void OnMouseDown()
+    {
+        _pickedUp = true;
+        foreach(Tile t in _movement.CalculatePossibleMoves(_currentTile.address))
+        {
+            t._dot.SetActive(true);
+        }
     }
 
     private void OnMouseDrag()
     {
-        _pickedUp = true;
+
+
         transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f));
     }
 
     private void OnMouseUp()
     {
         _pickedUp = false;
-        float distance = 1.0f;
-        foreach(Tile t in Board._instance.GetTiles())
+        float distance = .5f;
+        foreach(Tile t in _movement.CalculatePossibleMoves(_currentTile.address))
         {
             if (Vector3.Distance(transform.position, t.transform.position) < distance)
             {
                 distance = Vector3.Distance(transform.position, t.transform.position);
                 _currentTile = t;
             }
+            t._dot.SetActive(false);
         }
-        Debug.Log(_currentTile.address);
+        //Debug.Log(_currentTile.address);
     }
 
     private void Update()

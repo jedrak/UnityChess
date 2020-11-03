@@ -6,4 +6,10 @@ using UnityEngine;
 public class Tile : MonoBehaviour
 {
     public Tuple<char, int> address;
+    [SerializeField] public GameObject _dot { get; private set; }
+    private void Start()
+    {
+        _dot = GetComponentsInChildren<Transform>()[1].gameObject;
+        _dot.SetActive(false);
+    }
 }
