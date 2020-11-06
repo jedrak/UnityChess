@@ -6,25 +6,29 @@ public class KingMovment : MonoBehaviour, IPieceMovement
 {
     public Tile[] CalculatePossibleMoves(Tile address)
     {
-        List<Tile> ret = new List<Tile>();
-        //Debug.Log(("" + address.Item1 + (address.Item2 + 1)).Length);
+        Tile[] up = Board.RayCast(address, Vector2Int.up, 2);
+        Tile[] down = Board.RayCast(address, Vector2Int.down, 2);
+        Tile[] left = Board.RayCast(address, Vector2Int.left, 2);
+        Tile[] right = Board.RayCast(address, Vector2Int.right, 2);
+
+        Tile[] upleft = Board.RayCast(address, Vector2Int.up + Vector2Int.left, 2);
+        Tile[] upright = Board.RayCast(address, Vector2Int.up + Vector2Int.right, 2);
+        Tile[] downright = Board.RayCast(address, Vector2Int.down + Vector2Int.right, 2);
+        Tile[] downleft = Board.RayCast(address, Vector2Int.down + Vector2Int.left, 2);
+
+        Tile[] ret = new Tile[up.Length + down.Length + left.Length + right.Length + upleft.Length + upright.Length + downright.Length + downleft.Length];
 
 
+        up.CopyTo(ret, 0);
+        down.CopyTo(ret, up.Length);
+        left.CopyTo(ret, up.Length + down.Length);
+        right.CopyTo(ret, up.Length + down.Length + left.Length);
+        upleft.CopyTo(ret, up.Length + down.Length + left.Length + right.Length);
+        upright.CopyTo(ret, up.Length + down.Length + left.Length + right.Length + upleft.Length);
+        downright.CopyTo(ret, up.Length + down.Length + left.Length + right.Length + upleft.Length + upright.Length);
+        downleft.CopyTo(ret, up.Length + down.Length + left.Length + right.Length + upleft.Length + upright.Length + downright.Length);
 
-        /*for(int i = -1; i <= 1; i++)
-        {
-            for(int j = -1; j <= 1; j++)
-            {
-                //Tile t = Board._instance.GetTile((char)(address.Item1 + i), (address.Item2 + j));
-                if(t != null)
-                {
-                    if(i != 0 || j != 0) ret.Add(t);
-                }
-                
-            }
-        }*/
-
-        return ret.ToArray();
+        return ret;
 
     }
 }

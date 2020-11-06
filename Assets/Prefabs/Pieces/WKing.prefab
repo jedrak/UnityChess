@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8306115092068254827}
   - component: {fileID: 8306115092068254828}
   - component: {fileID: 14075158368879725}
+  - component: {fileID: 2203883816134424838}
   m_Layer: 0
   m_Name: WKing
   m_TagString: Untagged
@@ -150,3 +151,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.48, y: 2.51}
   m_EdgeRadius: 0
+--- !u!114 &2203883816134424838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8306115092068254824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffbddd7a5de27224087054aa4f17b728, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
