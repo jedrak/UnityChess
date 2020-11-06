@@ -18,8 +18,8 @@ public class PawnMovement : MonoBehaviour, IPieceMovement
         {
             up = Board.RayCast(address, dir*Vector2Int.up, 3);
         }
-        Tile[] upleft;// Board.RayCast(address, Vector2Int.up + Vector2Int.left, 2);
-        Tile [] upright; //Board.RayCast(address, Vector2Int.up + Vector2Int.right, 2);
+        Tile[] upleft;
+        Tile [] upright;
         Tile [] buff = Board.RayCast(address, dir*(Vector2Int.up + Vector2Int.left), 2);
         if (buff.Length != 0 && buff[0].Taken)
         {

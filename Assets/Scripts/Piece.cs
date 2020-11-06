@@ -2,20 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum Col
+{
+    Black,
+    White
+}
+
 public class Piece : MonoBehaviour
 {
     private Board _board;
     private Tile _currentTile;
     public string StartingTile = "a1";
+    
     private bool _pickedUp = false;
     private IPieceMovement _movement;
+    public Col color;
 
     private void Start()
     {
         _board = Board._instance;
-        // _startingTile = Board._instance.GetTiles()[0];
-        //Debug.Log(StartingTile);
-        //Debug.Log(Board._instance.GetTile(StartingTile));
+
         _currentTile = Board._instance.GetTile(StartingTile);
         _currentTile.Taken = true;
         transform.position = _currentTile.transform.position;

@@ -44,9 +44,9 @@ TagManager:
   - name: Tile
     uniqueID: 3674847465
     locked: 0
-  - name: Dot
-    uniqueID: 90367907
-    locked: 0
   - name: Pieces
     uniqueID: 1189744657
+    locked: 0
+  - name: Dot
+    uniqueID: 90367907
     locked: 0
