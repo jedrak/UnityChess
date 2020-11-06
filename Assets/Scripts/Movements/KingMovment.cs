@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class KingMovment : MonoBehaviour, IPieceMovement
 {
-    public Tile[] CalculatePossibleMoves(Tile address)
+    public Tile[] CalculatePossibleMoves(Tile address, Col color)
     {
-        Tile[] up = Board.RayCast(address, Vector2Int.up, 2);
-        Tile[] down = Board.RayCast(address, Vector2Int.down, 2);
-        Tile[] left = Board.RayCast(address, Vector2Int.left, 2);
-        Tile[] right = Board.RayCast(address, Vector2Int.right, 2);
+        Tile[] up = Board.RayCast(address, Vector2Int.up, 2, color);
+        Tile[] down = Board.RayCast(address, Vector2Int.down, 2, color);
+        Tile[] left = Board.RayCast(address, Vector2Int.left, 2, color);
+        Tile[] right = Board.RayCast(address, Vector2Int.right, 2, color);
 
-        Tile[] upleft = Board.RayCast(address, Vector2Int.up + Vector2Int.left, 2);
-        Tile[] upright = Board.RayCast(address, Vector2Int.up + Vector2Int.right, 2);
-        Tile[] downright = Board.RayCast(address, Vector2Int.down + Vector2Int.right, 2);
-        Tile[] downleft = Board.RayCast(address, Vector2Int.down + Vector2Int.left, 2);
+        Tile[] upleft = Board.RayCast(address, Vector2Int.up + Vector2Int.left, 2, color);
+        Tile[] upright = Board.RayCast(address, Vector2Int.up + Vector2Int.right, 2, color);
+        Tile[] downright = Board.RayCast(address, Vector2Int.down + Vector2Int.right, 2, color);
+        Tile[] downleft = Board.RayCast(address, Vector2Int.down + Vector2Int.left, 2, color);
 
         Tile[] ret = new Tile[up.Length + down.Length + left.Length + right.Length + upleft.Length + upright.Length + downright.Length + downleft.Length];
 

@@ -6,7 +6,8 @@ using UnityEngine;
 public class Tile : MonoBehaviour
 {
     public Tuple<char, int> address;
-    public bool Taken = false;
+    //public bool Taken = false;
+    public Piece onTheBoard = null;
     [SerializeField] public GameObject _dot { get; private set; }
     private void Start()
     {

@@ -22,11 +22,12 @@ public class Piece : MonoBehaviour
     private void Start()
     {
         _board = Board._instance;
-
         _currentTile = Board._instance.GetTile(StartingTile);
-        _currentTile.Taken = true;
+        
+        _currentTile.onTheBoard = this;
         transform.position = _currentTile.transform.position;
         _movement = GetComponent<IPieceMovement>();
+
 
     }
 
@@ -34,9 +35,9 @@ public class Piece : MonoBehaviour
     private void OnMouseDown()
     {
         _pickedUp = true;
-        _currentTile.Taken = false;
+        _currentTile.onTheBoard = null;
 
-        foreach (Tile t in _movement.CalculatePossibleMoves(_currentTile))
+        foreach (Tile t in _movement.CalculatePossibleMoves(_currentTile, color))
         {
             if(t != null)
                 t._dot.SetActive(true);
@@ -56,7 +57,7 @@ public class Piece : MonoBehaviour
         _pickedUp = false;
         Tile before = _currentTile;
         float distance = .5f;
-        foreach(Tile t in _movement.CalculatePossibleMoves(_currentTile))
+        foreach(Tile t in _movement.CalculatePossibleMoves(_currentTile, color))
         {
             if(t != null)
             {
@@ -67,12 +68,12 @@ public class Piece : MonoBehaviour
 
                 }
                 t._dot.SetActive(false);
+                
             }
 
         }
-        _currentTile.Taken = true;
-        //else _currentTile.Taken = false;
-        //Debug.Log(_currentTile.address);
+        if(_currentTile.onTheBoard != null) Destroy(_currentTile.onTheBoard.gameObject);
+        _currentTile.onTheBoard = this;
     }
 
     private void Update()

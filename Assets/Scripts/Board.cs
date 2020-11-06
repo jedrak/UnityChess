@@ -46,7 +46,7 @@ public class Board : MonoBehaviour
         return _instance.GetComponentsInChildren<Tile>();
     }
 
-    public static Tile[] RayCast(Tile startPos, Vector2Int dir, int maxDistance)
+    public static Tile[] RayCast(Tile startPos, Vector2Int dir, int maxDistance, Col color)
     {
         List<Tile> ret = new List<Tile>();
 
@@ -57,8 +57,20 @@ public class Board : MonoBehaviour
             Tile buff = Board._instance.GetTile(c, y);
             if(buff != null)
             {
-                ret.Add(buff);
-                if (buff.Taken) break;
+                if (buff.onTheBoard == null) 
+                {
+                    ret.Add(buff);
+                }
+                else if (color != buff.onTheBoard.color)
+                {
+                    ret.Add(buff);
+                    break;
+                }
+                else if(color == buff.onTheBoard.color)
+                {
+                    break;
+                }
+
             }
 
         }

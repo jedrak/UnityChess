@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class BishopMovement : MonoBehaviour, IPieceMovement
 {
-    public Tile[] CalculatePossibleMoves(Tile address)
+    public Tile[] CalculatePossibleMoves(Tile address, Col color)
     {
-        Tile[] upleft = Board.RayCast(address, Vector2Int.up + Vector2Int.left, 8);
-        Tile[] upright = Board.RayCast(address, Vector2Int.up + Vector2Int.right, 8);
-        Tile[] downright = Board.RayCast(address, Vector2Int.down + Vector2Int.right, 8);
-        Tile[] downleft = Board.RayCast(address, Vector2Int.down + Vector2Int.left, 8);
+        Tile[] upleft = Board.RayCast(address, Vector2Int.up + Vector2Int.left, 8, color);
+        Tile[] upright = Board.RayCast(address, Vector2Int.up + Vector2Int.right, 8, color);
+        Tile[] downright = Board.RayCast(address, Vector2Int.down + Vector2Int.right, 8, color);
+        Tile[] downleft = Board.RayCast(address, Vector2Int.down + Vector2Int.left, 8, color);
 
         Tile[] ret = new Tile[upleft.Length + upright.Length + downright.Length + downleft.Length];
         upleft.CopyTo(ret, 0);

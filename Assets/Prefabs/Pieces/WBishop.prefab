@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6419270804406784871}
   - component: {fileID: 6419270804406784869}
   - component: {fileID: -2050535560936586098}
+  - component: {fileID: 8943510849463539264}
   m_Layer: 0
   m_Name: WBishop
   m_TagString: Untagged
@@ -124,3 +125,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.46, y: 2.49}
   m_EdgeRadius: 0
+--- !u!114 &8943510849463539264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6419270804406784888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8abbbef3440c1f4387d7fabf66547d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

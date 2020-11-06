@@ -5,23 +5,25 @@ using UnityEngine;
 public class PawnMovement : MonoBehaviour, IPieceMovement
 {
     public int dir = 1;
-    public Tile[] CalculatePossibleMoves(Tile address)
+    private Piece piece;
+
+    public Tile[] CalculatePossibleMoves(Tile address, Col color)
     {
 
         Tile[] up;
         if (address.address.Item2 != 2 && address.address.Item2 != 7)
         {
-            up = Board.RayCast(address, dir*Vector2Int.up, 2);
+            up = Board.RayCast(address, dir*Vector2Int.up, 2, color);
 
         }
         else
         {
-            up = Board.RayCast(address, dir*Vector2Int.up, 3);
+            up = Board.RayCast(address, dir*Vector2Int.up, 3, color);
         }
         Tile[] upleft;
         Tile [] upright;
-        Tile [] buff = Board.RayCast(address, dir*(Vector2Int.up + Vector2Int.left), 2);
-        if (buff.Length != 0 && buff[0].Taken)
+        Tile [] buff = Board.RayCast(address, dir*(Vector2Int.up + Vector2Int.left), 2, color);
+        if (buff.Length != 0 && buff[0].onTheBoard != null)
         {
             upleft = new Tile[1];
             buff.CopyTo(upleft, 0);
@@ -31,8 +33,8 @@ public class PawnMovement : MonoBehaviour, IPieceMovement
             upleft = new Tile[0];
         }
 
-        buff = Board.RayCast(address, dir *(Vector2Int.up + Vector2Int.right), 2);
-        if (buff.Length != 0 && buff[0].Taken)
+        buff = Board.RayCast(address, dir *(Vector2Int.up + Vector2Int.right), 2, color);
+        if (buff.Length != 0 && buff[0].onTheBoard != null)
         {
             upright = new Tile[1];
             buff.CopyTo(upright, 0);

@@ -5,19 +5,19 @@ using UnityEngine;
 
 public class QueensMovement : MonoBehaviour, IPieceMovement
 {
-    public Tile[] CalculatePossibleMoves(Tile address)
+    public Tile[] CalculatePossibleMoves(Tile address, Col color)
     {
 
         //should problably use rock and bisho movement to calculate this
-        Tile[] up = Board.RayCast(address, Vector2Int.up, 8);
-        Tile[] down = Board.RayCast(address, Vector2Int.down, 8);
-        Tile[] left = Board.RayCast(address, Vector2Int.left, 8);
-        Tile[] right = Board.RayCast(address, Vector2Int.right, 8);
+        Tile[] up = Board.RayCast(address, Vector2Int.up, 8, color);
+        Tile[] down = Board.RayCast(address, Vector2Int.down, 8, color);
+        Tile[] left = Board.RayCast(address, Vector2Int.left, 8, color);
+        Tile[] right = Board.RayCast(address, Vector2Int.right, 8, color);
 
-        Tile[] upleft = Board.RayCast(address, Vector2Int.up + Vector2Int.left, 8);
-        Tile[] upright = Board.RayCast(address, Vector2Int.up + Vector2Int.right, 8);
-        Tile[] downright = Board.RayCast(address, Vector2Int.down + Vector2Int.right, 8);
-        Tile[] downleft = Board.RayCast(address, Vector2Int.down + Vector2Int.left, 8);
+        Tile[] upleft = Board.RayCast(address, Vector2Int.up + Vector2Int.left, 8, color);
+        Tile[] upright = Board.RayCast(address, Vector2Int.up + Vector2Int.right, 8, color);
+        Tile[] downright = Board.RayCast(address, Vector2Int.down + Vector2Int.right, 8, color);
+        Tile[] downleft = Board.RayCast(address, Vector2Int.down + Vector2Int.left, 8, color);
 
         Tile[] ret = new Tile[up.Length + down.Length + left.Length + right.Length + upleft.Length + upright.Length + downright.Length + downleft.Length];
         

@@ -5,7 +5,7 @@ using System;
 
 interface IPieceMovement
 {
-    Tile[] CalculatePossibleMoves(Tile address);
+    Tile[] CalculatePossibleMoves(Tile address, Col color);
 
     
 
