@@ -34,46 +34,71 @@ public class Piece : MonoBehaviour
 
     private void OnMouseDown()
     {
-        _pickedUp = true;
-        _currentTile.onTheBoard = null;
-
-        foreach (Tile t in _movement.CalculatePossibleMoves(_currentTile, color))
+        if(color == Board._instance.Turn)
         {
-            if(t != null)
-                t._dot.SetActive(true);
+            _pickedUp = true;
+            _currentTile.onTheBoard = null;
+
+            foreach (Tile t in _movement.CalculatePossibleMoves(_currentTile, color))
+            {
+                if(t != null)
+                {
+                    t._dot.SetActive(true);
+                }
+                    
+            }
         }
+
 
     }
 
     private void OnMouseDrag()
     {
-
-
-        transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f));
+        if(_pickedUp) transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f));
     }
 
     private void OnMouseUp()
     {
-        _pickedUp = false;
-        Tile before = _currentTile;
-        float distance = .5f;
-        foreach(Tile t in _movement.CalculatePossibleMoves(_currentTile, color))
+        if (color == Board._instance.Turn)
         {
-            if(t != null)
+            _pickedUp = false;
+            Tile before = _currentTile;
+            float distance = .5f;
+            foreach(Tile t in _movement.CalculatePossibleMoves(_currentTile, color))
             {
-                if (Vector3.Distance(transform.position, t.transform.position) < distance)
+                if(t != null)
                 {
-                    distance = Vector3.Distance(transform.position, t.transform.position);
-                    _currentTile = t;
-
-                }
-                t._dot.SetActive(false);
+                    if (Vector3.Distance(transform.position, t.transform.position) < distance)
+                    {
+                        distance = Vector3.Distance(transform.position, t.transform.position);
+                        _currentTile = t;
+                        
+                    }
+                    t._dot.SetActive(false);
                 
+                }
+
+            }
+            
+            if(_currentTile.onTheBoard != null) Destroy(_currentTile.onTheBoard.gameObject);
+            _currentTile.onTheBoard = this;
+            if (before != _currentTile)
+            {
+                switch (Board._instance.Turn)
+                {
+                    case Col.White:
+                        Board._instance.Turn = Col.Black;
+                        break;
+                    case Col.Black:
+                        Board._instance.Turn = Col.White;
+                        break;
+                }
             }
 
+
+            
         }
-        if(_currentTile.onTheBoard != null) Destroy(_currentTile.onTheBoard.gameObject);
-        _currentTile.onTheBoard = this;
+       
     }
 
     private void Update()

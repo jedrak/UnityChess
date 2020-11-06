@@ -7,7 +7,7 @@ public class Board : MonoBehaviour
 {
     public GameObject tile;
     public static Board _instance;
-    
+    public Col Turn;
 
     // Start is called before the first frame update
 
@@ -38,7 +38,7 @@ public class Board : MonoBehaviour
 
     void Start()
     {
-        
+        Turn = Col.White;
     }
 
     public Tile[] GetTiles()
