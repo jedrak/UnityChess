@@ -46,6 +46,26 @@ public class Board : MonoBehaviour
         return _instance.GetComponentsInChildren<Tile>();
     }
 
+    public static Tile[] RayCast(Tile startPos, Vector2Int dir, int maxDistance)
+    {
+        List<Tile> ret = new List<Tile>();
+
+        for (int i = 1; i < maxDistance; i++)
+        {
+            char c = (char)(startPos.address.Item1 + (char)(i * dir.x));
+            int y = startPos.address.Item2 + (i * dir.y);
+            Tile buff = Board._instance.GetTile(c, y);
+            if(buff != null)
+            {
+                ret.Add(buff);
+                if (buff.Taken) break;
+            }
+
+        }
+
+        return ret.ToArray();
+    }
+
     public Tile GetTile(string address)
     {
         Tuple<char, int> buff;

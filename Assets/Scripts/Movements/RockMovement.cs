@@ -5,29 +5,19 @@ using UnityEngine;
 
 public class RockMovement : MonoBehaviour,  IPieceMovement
 {
-    public Tile[] CalculatePossibleMoves(Tuple<char, int> address)
+    public Tile[] CalculatePossibleMoves(Tile address)
     {
-        List<Tile> ret = new List<Tile>();
-        //Debug.Log(("" + address.Item1 + (address.Item2 + 1)).Length);
+        Tile[] up = Board.RayCast(address, Vector2Int.up, 8);
+        Tile[] down = Board.RayCast(address, Vector2Int.down, 8);
+        Tile[] left = Board.RayCast(address, Vector2Int.left, 8);
+        Tile[] right = Board.RayCast(address, Vector2Int.right, 8);
+        Tile[] ret = new Tile[up.Length + down.Length + left.Length + right.Length];
+        up.CopyTo(ret, 0);
+        down.CopyTo(ret, up.Length);
+        left.CopyTo(ret, up.Length + down.Length);
+        right.CopyTo(ret, up.Length + down.Length + left.Length);
 
-
-        //TODO optimize
-        for (int i = -8; i <= 8; i++)
-        {
-
-            Tile t = Board._instance.GetTile((char)(address.Item1 + i), (address.Item2));
-            if (t != null)
-            {
-                if ((i != 0)) ret.Add(t);
-            }
-            t = Board._instance.GetTile((char)(address.Item1), (address.Item2 + i));
-            if (t != null)
-            {
-                if ((i != 0)) ret.Add(t);
-            }
-        }
-
-        return ret.ToArray();
+        return ret;
     }
 
 }

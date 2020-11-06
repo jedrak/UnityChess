@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 interface IPieceMovement
 {
-    Tile[] CalculatePossibleMoves(System.Tuple<char, int> address);
+    Tile[] CalculatePossibleMoves(Tile address);
+
+    
 
 }

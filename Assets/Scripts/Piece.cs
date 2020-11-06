@@ -17,6 +17,7 @@ public class Piece : MonoBehaviour
         //Debug.Log(StartingTile);
         //Debug.Log(Board._instance.GetTile(StartingTile));
         _currentTile = Board._instance.GetTile(StartingTile);
+        _currentTile.Taken = true;
         transform.position = _currentTile.transform.position;
         _movement = GetComponent<IPieceMovement>();
 
@@ -26,10 +27,14 @@ public class Piece : MonoBehaviour
     private void OnMouseDown()
     {
         _pickedUp = true;
-        foreach(Tile t in _movement.CalculatePossibleMoves(_currentTile.address))
+        _currentTile.Taken = false;
+
+        foreach (Tile t in _movement.CalculatePossibleMoves(_currentTile))
         {
-            t._dot.SetActive(true);
+            if(t != null)
+                t._dot.SetActive(true);
         }
+
     }
 
     private void OnMouseDrag()
@@ -42,16 +47,24 @@ public class Piece : MonoBehaviour
     private void OnMouseUp()
     {
         _pickedUp = false;
+        Tile before = _currentTile;
         float distance = .5f;
-        foreach(Tile t in _movement.CalculatePossibleMoves(_currentTile.address))
+        foreach(Tile t in _movement.CalculatePossibleMoves(_currentTile))
         {
-            if (Vector3.Distance(transform.position, t.transform.position) < distance)
+            if(t != null)
             {
-                distance = Vector3.Distance(transform.position, t.transform.position);
-                _currentTile = t;
+                if (Vector3.Distance(transform.position, t.transform.position) < distance)
+                {
+                    distance = Vector3.Distance(transform.position, t.transform.position);
+                    _currentTile = t;
+
+                }
+                t._dot.SetActive(false);
             }
-            t._dot.SetActive(false);
+
         }
+        _currentTile.Taken = true;
+        //else _currentTile.Taken = false;
         //Debug.Log(_currentTile.address);
     }
 
