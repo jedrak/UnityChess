@@ -7,6 +7,15 @@ public class PawnMovement : MonoBehaviour, IPieceMovement
     public int dir = 1;
     private Piece piece;
 
+    public Tile[] CalculatePossibleAttacks(Tile address, Col color)
+    {
+        Tile[] upleft = Board.RayCast(address, dir * (Vector2Int.up + Vector2Int.left), 2, color);
+        Tile[] upright = Board.RayCast(address, dir * (Vector2Int.up + Vector2Int.right), 2, color);
+        Tile[] ret = new Tile[upleft.Length + upright.Length];
+        upleft.CopyTo(ret, 0);upright.CopyTo(ret, upleft.Length);
+        return ret;
+    }
+
     public Tile[] CalculatePossibleMoves(Tile address, Col color)
     {
         Tile[] buff;

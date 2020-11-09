@@ -17,7 +17,14 @@ public class BishopMovement : MonoBehaviour, IPieceMovement
         upright.CopyTo(ret, upleft.Length);
         downright.CopyTo(ret, upleft.Length + upright.Length);
         downleft.CopyTo(ret, upleft.Length + upright.Length + downright.Length);
+        string S = "";
 
+        foreach (Tile t in downright)
+        {
+            S += t.address.ToString() + " ";
+
+        }
+        //Debug.Log(S + ret.Length);
 
         return ret;
     }

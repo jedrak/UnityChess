@@ -12,11 +12,13 @@ public enum Col
 public class Piece : MonoBehaviour
 {
     private Board _board;
-    private Tile _currentTile;
+
+    //change to private after finishing debugging
+    public Tile _currentTile;
     public string StartingTile = "a1";
     
     private bool _pickedUp = false;
-    private IPieceMovement _movement;
+    public IPieceMovement _movement;
     public Col color;
 
     private void Start()

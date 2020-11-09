@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-interface IPieceMovement
+public interface IPieceMovement
 {
     Tile[] CalculatePossibleMoves(Tile address, Col color);
 
